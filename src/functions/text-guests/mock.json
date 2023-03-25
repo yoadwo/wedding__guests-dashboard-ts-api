@@ -1,0 +1,6 @@
+{
+  "headers": {
+    "Content-Type": "application/json"
+  },
+  "body": "[{\"firstName\": \"Frederic would like to join the party\", \"phoneNumber\": \"0523677896\", \"phoneNumberHash\": \"123\"}, {\"firstName\": \"yoad would like to join the party\", \"phoneNumber\": \"0523677896\", \"phoneNumberHash\": \"123\"}]"
+}
