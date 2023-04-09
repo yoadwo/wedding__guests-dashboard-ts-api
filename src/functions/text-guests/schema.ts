@@ -7,6 +7,7 @@ export default {
       phoneNumber: { type: 'string', maxLength: 30 },
       phoneNumberHash: { type: 'string', maxLength: 256 }    
     },
+    required: ["firstName", "phoneNumber", "phoneNumberHash"],
     additionalProperties: false
   }
 } as const;

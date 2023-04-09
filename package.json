@@ -12,7 +12,8 @@
   "dependencies": {
     "@middy/core": "^3.4.0",
     "@middy/http-json-body-parser": "^3.4.0",
-    "mysql": "^2.18.1"
+    "mysql": "^2.18.1",
+    "throat": "^6.0.2"
   },
   "devDependencies": {
     "@serverless/typescript": "^3.27.0",

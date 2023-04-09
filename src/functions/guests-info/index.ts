@@ -8,11 +8,6 @@ export const getGuestsInfo = {
       http: {
         method: 'get',
         path: 'get-guests-info',
-        // request: {
-        //   schemas: {
-        //     'application/json': schema,
-        //   },
-        // },
         cors: true
       },
     },
