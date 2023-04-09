@@ -33,6 +33,7 @@ const serverlessConfiguration: AWS = {
       GUESTS_DB_USER: '${param:GUESTS_DB_USER}',
       GUESTS_DB_PWD: '${param:GUESTS_DB_PWD}',
       GUESTS_DB_NAME: '${param:GUESTS_DB_NAME}',
+      RSVP_LINK: '${param:RSVP_LINK}',
     },
   },
   // import the function via paths

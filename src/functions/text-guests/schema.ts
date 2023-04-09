@@ -3,7 +3,7 @@ export default {
   items: {
     type: "object",
     properties: {
-      firstName: { type: 'string', pattern: "^[א-תa-z]{1,50}$" },
+      firstName: { type: 'string', pattern: "^[א-תa-z0-9]{1,50}$" },
       phoneNumber: { type: 'string', maxLength: 30 },
       phoneNumberHash: { type: 'string', maxLength: 256 }    
     },

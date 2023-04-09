@@ -13,27 +13,26 @@ const textGuests: ValidatedEventAPIGatewayProxyEvent<typeof schema> = async (eve
     return MessageUtil.error(-1, "bad request: body is missing");
   }
 
-  console.log('this is body: ', event.body);
-  var Message = event.body[0].firstName;
-  var PhoneNumber = '+972' + event.body[0].phoneNumber.substring(1); // trim leading zero
-  console.log('sending details to first contact only. messaage, phone number', Message, PhoneNumber);
+  console.log('this is body: ', event.body);  
 
-  var params = {
-    Message: Message,
-    PhoneNumber: PhoneNumber,
-    MessageAttributes: {
-      'AWS.SNS.SMS.SenderID': {
-        'DataType': 'String',
-        'StringValue': 'WEDD-RSVP'
-      }
-    }
-  };
+  let params = {
+    Message: undefined,
+    PhoneNumber: undefined
+  }
+
+  let promises: Promise<SNS.PublishResponse>[] = [];
+  const inviteLink = process.env.RSVP_LINK;
+
+  event.body.forEach((guest) => {
+    params.Message = `הי ${guest.firstName}, הוזמנת לחתונה של שירלי ויועד. אנא עדכנו אם תגיעו בלחיצה על הקישור הבא - ${inviteLink+guest.phoneNumberHash}`;
+    params.PhoneNumber = `+972${guest.phoneNumber.substring(1)}`;
+    promises.push(publishTextPromise.publish(params).promise());
+  });
 
   let snsResp;
   try {
-    snsResp = await publishTextPromise.publish(params).promise();
+    snsResp = await Promise.all(promises);
     console.log("sns response", snsResp);
-    // await SNSpublisher.publish(messageParams).promise();
   } catch (err) {
     console.log('sns err', err)
     return MessageUtil.error(err.code, err.message);
