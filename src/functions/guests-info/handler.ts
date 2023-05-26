@@ -3,17 +3,21 @@ import { MessageUtil } from '@libs/responseAPI';
 import { middyfy } from '@libs/lambda';
 import { makeDb } from '@libs/mysql';
 
-import { guestEM } from 'src/model/guest';
+import { guestEM, guestsResponse } from 'src/model/guest';
+
 
 const getGuestsInfo: EventAPIGatewayProxyEvent = async (event) => {
   const db = makeDb();
-
+  
   try {
     const guests: guestEM[] = await db.query(
-      "select firstName, lastName, phoneNumber, phoneNumberHash, status " +
-      "from guests", []);
+      `select recipient, phoneNumber, phoneNumberHash, status from ${process.env.GUESTS_DB_TABLE}`, []);
     console.log('guests list: ', guests);
-    return MessageUtil.success(guests);
+    const resp: guestsResponse = {
+      guests: guests,
+      rsvpLink: process.env.RSVP_LINK
+    }
+    return MessageUtil.success(resp);
 
   } catch (err) {
     console.error(err);
