@@ -11,7 +11,7 @@ const getGuestsInfo: EventAPIGatewayProxyEvent = async (event) => {
   
   try {
     const guests: guestEM[] = await db.query(
-      `select recipient, phoneNumber, phoneNumberHash, status, attendingCount, side, _group from ${process.env.GUESTS_DB_TABLE}`, []);
+      `select recipient, phoneNumber, phoneNumberHash, status, attendingCount, side, _group, messagesReceived from ${process.env.GUESTS_DB_TABLE}`, []);
     console.log('guests list: ', guests);
     const resp: guestsResponse = {
       guests: guests,

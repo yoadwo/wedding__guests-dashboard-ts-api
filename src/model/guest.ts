@@ -9,7 +9,8 @@ export interface guestEM {
     recipient: string,
     phoneNumber: string,
     phoneNumberHash: string,
-    status: number
+    status: number,
+    messagesReceived: number,
 }
 
 export interface guestsResponse {
